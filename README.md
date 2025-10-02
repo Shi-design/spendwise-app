@@ -1,0 +1,2 @@
+# spendwise-app
+expense calculator 
