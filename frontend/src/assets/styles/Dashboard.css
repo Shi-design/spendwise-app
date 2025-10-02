@@ -1,0 +1,111 @@
+/* ===== DASHBOARD (Budget Overview) ===== */
+.budget-overview {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
+.budget-box {
+  background: linear-gradient(135deg, #8e24aa, #ab47bc, #d81b60);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 25px rgba(255, 105, 180, 0.3);
+  flex: 1;
+  margin: 0 10px;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+}
+
+.remaining {
+  background: #1b5e20 !important; /* Dark green for remaining budget */
+  box-shadow: 0 4px 20px rgba(76, 175, 80, 0.4);
+}
+
+/* ===== EXPENSE LIST ===== */
+.list {
+  list-style: none;
+  padding: 0;
+}
+
+.list-item {
+  background: #1a1a1a;
+  border-left: 5px solid #ab47bc;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(171, 71, 188, 0.3);
+  transition: transform 0.2s ease;
+}
+
+.list-item:hover {
+  transform: translateX(5px);
+}
+
+.category-tag {
+  display: inline-block;
+  background: #8e24aa;
+  color: white;
+  padding: 3px 10px;
+  border-radius: 12px;
+  margin-right: 10px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.delete-btn {
+  background: #bd1754;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.delete-btn:hover {
+  background: #d72170;
+}
+/* Budget Input Styling */
+.budget-input {
+  margin: 20px 0;
+  display: flex;
+  gap: 10px;
+}
+
+.budget-input input {
+  padding: 12px;
+  font-size: 16px;
+  width: 220px;
+  border-radius: 8px;
+  border: none;
+}
+
+.budget-input button {
+  padding: 12px 18px;
+  font-size: 16px;
+  background: linear-gradient(to right, #d4145a, #fbb03b);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.budget-input button:hover {
+  background: linear-gradient(to right, #fbb03b, #d4145a);
+}
+
+/* Make category, amount, notes inputs bigger */
+select, input[type="number"], input[type="text"] {
+  padding: 12px;
+  font-size: 16px;
+  width: 200px;
+  margin-right: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
