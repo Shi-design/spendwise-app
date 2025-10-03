@@ -1,39 +1,45 @@
-const express = require('express');
-const dotenv = require('dotenv');
-const cors = require('cors');
-const connectDB = require('./config/db'); // DB connection file
+const express = require("express");
+const dotenv = require("dotenv");
+const cors = require("cors");
+const path = require("path");
+const connectDB = require("./config/db"); // your MongoDB connection
 
-// Load environment variables
 dotenv.config();
 
-// Connect to database
+// Connect to MongoDB
 connectDB();
 
-// Initialize express app
 const app = express();
 
-// ✅ CORS setup (allow only your Netlify frontend)
-app.use(cors({
-  origin: "https://classy-biscochitos-a43750.netlify.app", 
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true
-}));
-
-// Middleware
+// Middlewares
 app.use(express.json());
 
-// Routes
-app.use('/api/expenses', require('./routes/expenses'));
-app.use('/api/users', require('./routes/users'));
+// Optional CORS (if you later want external clients)
+app.use(cors());
 
-// ✅ Base route for Render health check
-app.get('/', (req, res) => {
-  res.send('SpendWise API is running... ✅');
+// API routes
+app.use("/api/expenses", require("./routes/expenses"));
+app.use("/api/users", require("./routes/users"));
+
+// Health check route
+app.get("/api", (req, res) => {
+  res.send("✅ SpendWise API is running...");
 });
 
-// Port setup
+// ---------------------
+// Serve React frontend
+// ---------------------
+const __dirname1 = path.resolve();
+
+// Serve static files from frontend build
+app.use(express.static(path.join(__dirname1, "/frontend/build")));
+
+// Catch-all route for React Router
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname1, "frontend", "build", "index.html"));
+});
+
+// ---------------------
+
 const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));

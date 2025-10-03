@@ -1,8 +1,9 @@
 import axios from "axios";
 
-// ✅ Use Netlify env var (recommended), fallback to your Render backend
+// ✅ Since frontend + backend are deployed together on Render,
+//    we can just use relative "/api"
 const API = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || "https://spendwise-app-0wdp.onrender.com/api",
+  baseURL: "/api",
 });
 
 // ✅ Attach JWT token (if present) to every request
@@ -17,7 +18,7 @@ API.interceptors.request.use(
         }
       }
     } catch (e) {
-      // Ignore JSON parse errors
+      // ignore JSON parse errors
     }
     return config;
   },

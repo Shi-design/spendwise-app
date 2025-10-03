@@ -1,0 +1,9 @@
+{
+  "name": "spendwise",
+  "scripts": {
+    "start": "node backend/server.js",
+    "server": "nodemon backend/server.js",
+    "client": "npm start --prefix frontend",
+    "build": "npm install --prefix frontend && npm run build --prefix frontend"
+  }
+}
