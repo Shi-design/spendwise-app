@@ -1,11 +1,11 @@
 import axios from "axios";
 
-// use env variable in Netlify OR fallback to Render URL
+// ✅ Use Netlify env var (recommended), fallback to your Render backend
 const API = axios.create({
   baseURL: process.env.REACT_APP_API_URL || "https://spendwise-app-0wdp.onrender.com/api",
 });
 
-// Attach JWT token (if present) to every request
+// ✅ Attach JWT token (if present) to every request
 API.interceptors.request.use(
   (config) => {
     try {
@@ -17,17 +17,19 @@ API.interceptors.request.use(
         }
       }
     } catch (e) {
-      // ignore parse errors
+      // Ignore JSON parse errors
     }
     return config;
   },
   (error) => Promise.reject(error)
 );
 
+// ✅ Expense routes
 export const getExpenses = () => API.get("/expenses");
 export const addExpense = (data) => API.post("/expenses", data);
 export const deleteExpense = (id) => API.delete(`/expenses/${id}`);
 
+// ✅ User routes
 export const registerUser = (data) => API.post("/users/register", data);
 export const loginUser = (data) => API.post("/users/login", data);
 
