@@ -12,17 +12,23 @@ connectDB();
 // Initialize express app
 const app = express();
 
+// ✅ CORS setup (allow only your Netlify frontend)
+app.use(cors({
+  origin: "https://classy-biscochitos-a43750.netlify.app", 
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
+
 // Middleware
-app.use(cors());
 app.use(express.json());
 
 // Routes
 app.use('/api/expenses', require('./routes/expenses'));
 app.use('/api/users', require('./routes/users'));
 
-// Base route for testing
+// ✅ Base route for Render health check
 app.get('/', (req, res) => {
-  res.send('SpendWise API is running...');
+  res.send('SpendWise API is running... ✅');
 });
 
 // Port setup
